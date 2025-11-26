@@ -1,77 +1,372 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
-    <meta charset="utf-8" />
-    <title>RnHome</title>
+    <meta charset="UTF-8">
+    <title>SuperFoods Futuristic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: "Poppins", sans-serif;
-            background: linear-gradient(135deg, #1e1e2f, #2b2b40, #1a1a27);
         }
 
+        body {
+            background: #080c14;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
         nav {
-            width: 100%;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             z-index: 999;
         }
 
-        #topmenu ul {
-            list-style: none;
-            margin: 0;
-            padding: 15px 40px;
-            display: flex;
-            gap: 40px;
-            justify-content: flex-start;
-            align-items: center;
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #00ff9d;
+            text-shadow: 0 0 25px #00ff9d;
         }
 
-            #topmenu ul li a {
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+            nav ul li a {
+                color: white;
                 text-decoration: none;
                 font-size: 1.1rem;
-                color: #5e8eff;
-                letter-spacing: 1px;
-                padding: 10px 18px;
-                border-radius: 12px;
-                transition: 0.3s ease;
-                position: relative;
+                transition: 0.3s;
             }
 
-                #topmenu ul li a::before {
-                    content: "";
-                    position: absolute;
-                    width: 0%;
-                    height: 3px;
-                    background: #ff4dff;
-                    bottom: 0;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    transition: 0.3s;
-                    border-radius: 4px;
+                nav ul li a:hover {
+                    color: #00ff9d;
                 }
 
-                #topmenu ul li a:hover::before {
-                    width: 70%;
+        /* BURGER MENU */
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+            .burger div {
+                width: 26px;
+                height: 3px;
+                background: #00ff9d;
+                border-radius: 3px;
+            }
+
+        @media (max-width: 800px) {
+            nav ul {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                width: 200px;
+                padding: 20px;
+                transition: 0.3s;
+            }
+
+                nav ul.active {
+                    right: 0;
                 }
 
-                #topmenu ul li a:hover {
-                    background: rgba(255, 216, 94, 0.2);
-                    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-                }
+            .burger {
+                display: flex;
+            }
+        }
+
+        /* PROMO BANNER */
+        .promo-banner {
+            background: linear-gradient(90deg, #00ff9d, #008f5e);
+            color: black;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 120px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 20px #00ff9d;
+        }
+
+        /* HERO */
+        header {
+            text-align: center;
+            padding: 20px 25px 40px 25px;
+        }
+
+            header h1 {
+                font-size: 3.5rem;
+                color: #00ff9d;
+                text-shadow: 0 0 35px #00ff9d;
+                margin-bottom: 15px;
+            }
+
+            header p {
+                font-size: 1.3rem;
+                opacity: 0.8;
+            }
+
+        /* GRID */
+        .grid {
+            width: 90%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 35px;
+            padding-bottom: 50px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 0 30px rgba(0,255,150,0.1);
+            transition: 0.35s;
+            opacity: 0;
+            transform: translateY(40px);
+            position: relative;
+        }
+
+            .card.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .card img {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+                border-radius: 15px;
+                margin-bottom: 15px;
+                box-shadow: 0 0 20px #00ff9d80;
+            }
+
+        .sale-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff0059;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 0 10px #ff0059;
+        }
+
+        .card h3 {
+            color: #00ff9d;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #00ff9d;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #000;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+            .btn:hover {
+                background: #44ffbe;
+            }
+
+        /* TOP OFFERS */
+        .section {
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            margin: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .promo-box h2 {
+            color: #00ff9d;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #00ff9d;
+        }
+
+        .promo-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .promo-item {
+            background: rgba(0,0,0,0.4);
+            padding: 20px;
+            border-radius: 15px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,255,150,0.2);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #ff4b4b;
+            font-weight: bold;
+        }
+
+        .new-price {
+            color: #00ff9d;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            opacity: 0.5;
+        }
     </style>
 </head>
+
 <body>
-    <nav id="topmenu">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Menu</a></li>
-            <li><a href="#">Courses</a></li>
+
+    <nav>
+        <div class="logo">SuperFoods</div>
+
+        <ul id="nav-links">
+            <li><a href="#">Начало</a></li>
+            <li><a href="#">Суперхрани</a></li>
+            <li><a href="#">Оферти</a></li>
+            <li><a href="#">Контакт</a></li>
         </ul>
+
+        <div id="cart">0</div>
+
+        <div class="burger" id="burger">
+            <div></div><div></div><div></div>
+        </div>
     </nav>
+
+    <div class="promo-banner">
+        ⭐ Специална оферта: -20% на всички суперхрани до края на седмицата! ⭐
+    </div>
+
+    <header>
+        <h1>Футуристични суперхрани</h1>
+        <p>Храната на следващото поколение.</p>
+    </header>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="sale-tag">-20%</div>
+            <img src="images/Chia.png" alt="Чия">
+            <h3>Чия</h3>
+            <p>Енергиен супер боустър с протеини и омега-3.</p>
+            <a href="#" class="btn add">Добави</a>
+        </div>
+
+        <div class="card">
+            <div class="sale-tag">-15%</div>
+            <img src="images/godji.png" alt="Годжи бери">
+            <h3>Годжи бери</h3>
+            <p>Антиоксидантно чудо за силен имунитет.</p>
+            <a href="#" class="btn add">Добави</a>
+        </div>
+
+        <div class="card">
+            <div class="sale-tag">-10%</div>
+            <img src="images/maca.png" alt="Мака корен">
+            <h3>Мака корен</h3>
+            <p>Баланс, енергия и издръжливост — естествен адаптоген.</p>
+            <a href="#" class="btn add">Добави</a>
+        </div>
+
+        <div class="card">
+            <div class="sale-tag">-25%</div>
+            <img src="images/spirulina.png" alt="Спирулина">
+            <h3>Спирулина</h3>
+            <p>Една от най-богатите храни на планетата.</p>
+            <a href="#" class="btn add">Добави</a>
+        </div>
+
+    </div>
+
+    <div class="section promo-box">
+        <h2>Топ Оферти</h2>
+
+        <div class="promo-container">
+            <div class="promo-item">
+                <h3>Комбо пакет „Енергия“</h3>
+                <p>Чия + Спирулина</p>
+                <p class="old-price">29.99 лв</p>
+                <p class="new-price">19.99 лв</p>
+            </div>
+
+            <div class="promo-item">
+                <h3>Имунитет Макс</h3>
+                <p>Годжи бери + Мака</p>
+                <p class="old-price">24.99 лв</p>
+                <p class="new-price">17.99 лв</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 SuperFoods — Футуристична здравословна сила.
+    </footer>
+
+    <script>
+        document.getElementById("burger").onclick = () => {
+            document.getElementById("nav-links").classList.toggle("active");
+        };
+
+        let cart = 0;
+        document.querySelectorAll(".add").forEach(btn => {
+            btn.onclick = () => {
+                cart++;
+                document.getElementById("cart").innerText = cart;
+            };
+        });
+
+        const cards = document.querySelectorAll(".card");
+        const reveal = () => {
+            cards.forEach(c => {
+                const rect = c.getBoundingClientRect().top;
+                if (rect < window.innerHeight - 100) {
+                    c.classList.add("show");
+                }
+            });
+        };
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+
 </body>
 </html>
